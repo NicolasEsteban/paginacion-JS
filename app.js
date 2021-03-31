@@ -44,7 +44,7 @@ function previusPage() {
     pageNumber--;
     showData(pagination);
 };
-
+// define numero de botones entre el boton 'anterior' y 'siguiente'
 function calculateButtons(ranks){
     var numbers = [];
     if(pageNumber<ranks[0]){
