@@ -12,7 +12,7 @@ var ranks = [];
 // Funciones
 // Se inicia el contenido de prueba
 function startParameters() {
-    for (let i = 0; i < 19; i++) {
+    for (let i = 0; i < 50; i++) {
         data.push({ id: i + 1, name: 'usuario ' + (i + 1) });
 
     }
@@ -72,15 +72,24 @@ function calculateButtons(ranks){
     return numbers;
 };
 
+// Funcion para hacer variable la cantidad de elementos por vista
+function selectPageSize(){
+    pageSize = parseInt(document.querySelector('#select-page-size').value);
+    pageCont = Math.ceil(data.length / pageSize);
+    console.log(pageCont);
+    showData(pagination);
+    
+}
+
 // Funcion principal que realiza la paginacion y se escriben los botones en la vista
 function showData(_data) {
     var pagination = paginate(data, pageSize, pageNumber);
     //cantidad de pagina es mayor a 3
     
-    console.log(pageCont);
+    
     writeBodyTable(pagination);
     html = `<div class="btn-group me-2" role="group" aria-label="First group"></div>`;
-    html += pageNumber >1  ? `<button type="button" id="previus" class="btn btn-outline-primary" onclick='previusPage()' >  &laquo; </button> `: `<button type="button" id="previus" class="btn btn-outline-primary"  disabled > &laquo; </button> `;
+    html += pageNumber >1  ? `<button type="button" id="previus" class="btn btn-outline-primary" onclick='previusPage()' >  &laquo; </button> `: ``;
     //Si la pcantidad de pagina es mayor que 3, se imprimiran los botones del medio
     if (pageCont > 3) { 
         var numberButtons = calculateButtons(ranks);
@@ -94,7 +103,7 @@ function showData(_data) {
             }
         });
     }
-    html += pageNumber < pageCont ? `<button type="button" id="next" class="btn btn-outline-primary" onclick='nextPage()' > &raquo; </button>  `:`<button type="button" id="next" class="btn btn-outline-primary"  disabled> &raquo; </button>  `  ;
+    html += pageNumber < pageCont ? `<button type="button" id="next" class="btn btn-outline-primary" onclick='nextPage()' > &raquo; </button>  `:``;
     html +=` </div>`;
     document.getElementById("pagination").innerHTML = "";
     document.getElementById("pagination").innerHTML = html;
