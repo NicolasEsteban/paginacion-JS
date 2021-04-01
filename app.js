@@ -76,6 +76,7 @@ function calculateButtons(ranks){
 function selectPageSize(){
     pageSize = parseInt(document.querySelector('#select-page-size').value);
     pageCont = Math.ceil(data.length / pageSize);
+    pageNumber = 1;
     console.log(pageCont);
     showData(pagination);
     
