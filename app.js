@@ -11,7 +11,7 @@ var ranks = [];
 
 // Funciones
 function startParameters() {
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 30; i++) {
         data.push({ id: i + 1, name: 'usuario ' + (i + 1) });
 
     }
@@ -44,6 +44,12 @@ function previusPage() {
     pageNumber--;
     showData(pagination);
 };
+
+function selectPage(number){
+    //console.log('numero de pagina: '+number);
+    pageNumber = number;
+    showData(pagination);
+}
 // define numero de botones entre el boton 'anterior' y 'siguiente'
 function calculateButtons(ranks){
     var numbers = [];
@@ -68,12 +74,24 @@ function calculateButtons(ranks){
 
 function showData(_data) {
     var pagination = paginate(data, pageSize, pageNumber);
-    //console.log("nextPage", pagination);
-    var numberButtons = calculateButtons(ranks);
-    console.log('numero botones: '+numberButtons);
+    //cantidad de pagina es mayor a 3
+    
+    console.log(pageCont);
     writeBodyTable(pagination);
     html = `<div class="btn-group me-2" role="group" aria-label="First group"></div>`;
     html += pageNumber >1  ? `<button type="button" id="previus" class="btn btn-outline-primary" onclick='previusPage()' >Anterior</button> `: `<button type="button" id="previus" class="btn btn-outline-primary"  disabled >Anterior</button> `;
+    if (data.length > 18) { 
+        var numberButtons = calculateButtons(ranks);
+        console.log('numero botones: '+numberButtons);
+        numberButtons.forEach(numberB =>{
+            //console.log(numberB);
+            if(numberB === pageNumber){
+                html += `<button type="button" class="btn btn-primary" onclick="selectPage('${numberB}' );" >${numberB}</button>`;
+            }else{
+                html += `<button type="button" class="btn btn-outline-primary" onclick="selectPage('${numberB}' );" >${numberB}</button>`;
+            }
+        });
+    }
     html += pageNumber < pageCont ? `<button type="button" id="next" class="btn btn-outline-primary" onclick='nextPage()' >Siguiente</button>  `:`<button type="button" id="next" class="btn btn-outline-primary"  disabled>Siguiente</button>  `  ;
     html +=` </div>`;
     document.getElementById("pagination").innerHTML = "";
