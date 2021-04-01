@@ -11,7 +11,7 @@ var ranks = [];
 
 // Funciones
 function startParameters() {
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 19; i++) {
         data.push({ id: i + 1, name: 'usuario ' + (i + 1) });
 
     }
@@ -80,7 +80,7 @@ function showData(_data) {
     writeBodyTable(pagination);
     html = `<div class="btn-group me-2" role="group" aria-label="First group"></div>`;
     html += pageNumber >1  ? `<button type="button" id="previus" class="btn btn-outline-primary" onclick='previusPage()' >  &laquo; </button> `: `<button type="button" id="previus" class="btn btn-outline-primary"  disabled > &laquo; </button> `;
-    if (data.length > 18) { 
+    if (pageCont > 3) { 
         var numberButtons = calculateButtons(ranks);
         console.log('numero botones: '+numberButtons);
         numberButtons.forEach(numberB =>{
