@@ -10,6 +10,7 @@ var pageCont;
 var ranks = [];
 
 // Funciones
+// Se inicia el contenido de prueba
 function startParameters() {
     for (let i = 0; i < 19; i++) {
         data.push({ id: i + 1, name: 'usuario ' + (i + 1) });
@@ -17,7 +18,7 @@ function startParameters() {
     }
 
 };
-
+// Se escriben elementos en la tabla de datos
 function writeBodyTable(data) {
     var html = ``;
     data.forEach(cont => {
@@ -30,27 +31,27 @@ function writeBodyTable(data) {
     });
     document.getElementById('bodyTable').innerHTML = html;
 }
-
+// Se selecciona la cantidad de elementos que se mostra por pagina
 function paginate(array, page_size, page_number) {
     return array.slice((page_number - 1) * page_size, page_number * page_size);
 };
-
+// Funcion utilizada para la pagina siguiente
 function nextPage() {
     pageNumber++;
     showData(pagination);
 };
-
+// Funcion utilizada para ir a la pagina anterior
 function previusPage() {
     pageNumber--;
     showData(pagination);
 };
-
+// Funcion para seleccionar la pagina que indica cada uno de los botones
 function selectPage(number){
     //console.log('numero de pagina: '+number);
     pageNumber = parseInt(number);
     showData(pagination);
 }
-// define numero de botones entre el boton 'anterior' y 'siguiente'
+// Define numero de los botones entre el boton 'anterior' y 'siguiente'
 function calculateButtons(ranks){
     var numbers = [];
     if(pageNumber<ranks[0]){
@@ -71,7 +72,7 @@ function calculateButtons(ranks){
     return numbers;
 };
 
-
+// Funcion principal que realiza la paginacion y se escriben los botones en la vista
 function showData(_data) {
     var pagination = paginate(data, pageSize, pageNumber);
     //cantidad de pagina es mayor a 3
@@ -80,6 +81,7 @@ function showData(_data) {
     writeBodyTable(pagination);
     html = `<div class="btn-group me-2" role="group" aria-label="First group"></div>`;
     html += pageNumber >1  ? `<button type="button" id="previus" class="btn btn-outline-primary" onclick='previusPage()' >  &laquo; </button> `: `<button type="button" id="previus" class="btn btn-outline-primary"  disabled > &laquo; </button> `;
+    //Si la pcantidad de pagina es mayor que 3, se imprimiran los botones del medio
     if (pageCont > 3) { 
         var numberButtons = calculateButtons(ranks);
         console.log('numero botones: '+numberButtons);
@@ -111,10 +113,10 @@ startParameters();
 pageNumber = 1;
 // Elementos por pagina
 pageSize = 6;
-// Elemento utilizado 
+// Elemento utilizados para obtener los botones que estaran al medio 
 ranks.push(pageNumber,pageNumber+2);
 html = "";
-
+// Cantidad de paginas
 pageCont = Math.ceil(data.length / pageSize);
 
 
