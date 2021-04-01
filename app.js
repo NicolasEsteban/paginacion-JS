@@ -47,7 +47,7 @@ function previusPage() {
 
 function selectPage(number){
     //console.log('numero de pagina: '+number);
-    pageNumber = number;
+    pageNumber = parseInt(number);
     showData(pagination);
 }
 // define numero de botones entre el boton 'anterior' y 'siguiente'
@@ -79,7 +79,7 @@ function showData(_data) {
     console.log(pageCont);
     writeBodyTable(pagination);
     html = `<div class="btn-group me-2" role="group" aria-label="First group"></div>`;
-    html += pageNumber >1  ? `<button type="button" id="previus" class="btn btn-outline-primary" onclick='previusPage()' >Anterior</button> `: `<button type="button" id="previus" class="btn btn-outline-primary"  disabled >Anterior</button> `;
+    html += pageNumber >1  ? `<button type="button" id="previus" class="btn btn-outline-primary" onclick='previusPage()' >  &laquo; </button> `: `<button type="button" id="previus" class="btn btn-outline-primary"  disabled > &laquo; </button> `;
     if (data.length > 18) { 
         var numberButtons = calculateButtons(ranks);
         console.log('numero botones: '+numberButtons);
@@ -92,7 +92,7 @@ function showData(_data) {
             }
         });
     }
-    html += pageNumber < pageCont ? `<button type="button" id="next" class="btn btn-outline-primary" onclick='nextPage()' >Siguiente</button>  `:`<button type="button" id="next" class="btn btn-outline-primary"  disabled>Siguiente</button>  `  ;
+    html += pageNumber < pageCont ? `<button type="button" id="next" class="btn btn-outline-primary" onclick='nextPage()' > &raquo; </button>  `:`<button type="button" id="next" class="btn btn-outline-primary"  disabled> &raquo; </button>  `  ;
     html +=` </div>`;
     document.getElementById("pagination").innerHTML = "";
     document.getElementById("pagination").innerHTML = html;
